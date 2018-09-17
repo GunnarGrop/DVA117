@@ -8,7 +8,7 @@
 * Av Philip Andersson     *
 **************************/
 
-void fillArray(int inputArray[]);
+void fillArray(int inputArray[], int arraySize);
 int countElement(int inputArray[], int arraySize, int elementToCount);
 
 int main(void) {
@@ -20,7 +20,7 @@ int main(void) {
     while (running) {
         int array[10];
 
-        fillArray(array);
+        fillArray(array, 10);
 
         for(int i = 1; i <= 10; i++) {
             printf("Tal: %d\n", array[i-1]);
@@ -54,9 +54,9 @@ int main(void) {
     return 0;
 }
 
-void fillArray(int inputArray[]) {
-    
-    for(int i = 1; i <= 10; i++) {
+void fillArray(int inputArray[], int arraySize) {
+
+    for(int i = 1; i <= arraySize; i++) {
         inputArray[i-1] = rand()%10+1;
     }
 }
