@@ -8,7 +8,7 @@
 * Av Philip Andersson     *
 **************************/
 
-int fillArray(int inputArray[]);
+void fillArray(int inputArray[]);
 int countElement(int inputArray[], int arraySize, int elementToCount);
 
 int main(void) {
@@ -54,15 +54,11 @@ int main(void) {
     return 0;
 }
 
-int fillArray(int inputArray[]) {
-    int number;
-
+void fillArray(int inputArray[]) {
+    
     for(int i = 1; i <= 10; i++) {
-        number = rand()%10+1;
-        inputArray[i-1] = number;
+        inputArray[i-1] = rand()%10+1;
     }
-
-    return 0;
 }
 
 int countElement(int inputArray[], int arraySize, int elementToCount) {
