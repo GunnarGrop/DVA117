@@ -6,15 +6,16 @@
 int isPalindrom(char inputString[]);
 
 int main(void) {
+    int checkReturn;
     char input[MAX];
 
     printf("Kolla om en sträng är ett palindrom.\n");
     printf("Skriv in ett ord eller mening: ");
     gets(input);
-    isPalindrom(input);
 
-    if(isPalindrom == 0) {
-        printf("\nSträngne är ett palindrom!\n");
+    checkReturn = isPalindrom(input);
+    if(checkReturn == 1) {
+        printf("\nSträngnen är ett palindrom!\n");
     }
     else {
         printf("\nSträngen är inte ett palindrom.\n");
@@ -24,24 +25,18 @@ int main(void) {
 }
 
 int isPalindrom(char inputString[]) {
-    int len = strlen(inputString), isTheSame = 0;
+    int len = strlen(inputString), isTheSame = 1;
     char checkInput[MAX];
 
     for(int i = 0; i < len; i++) {
         checkInput[i] = inputString[len - 1 - i];
-
     }
 
     for(int i = 0; i < len; i++) {
         if(checkInput[i] != inputString[i]) {
-            isTheSame++;
+            isTheSame = 0;
         }
     }
 
-    if(isTheSame != 1) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    return isTheSame;
 }
