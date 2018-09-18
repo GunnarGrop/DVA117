@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX 20
+#define MAX 60
 
 /**************************
 * Uppgift 4.2             *
@@ -22,6 +22,7 @@ int main(void) {
     while (running == 1) {
         printf("Kolla om en sträng är ett palindrom.\n");
         printf("Skriv in ett ord eller mening: \n");
+
         while (getchar() != '\n'); //Rensar bufferten???
         gets(input);
 
