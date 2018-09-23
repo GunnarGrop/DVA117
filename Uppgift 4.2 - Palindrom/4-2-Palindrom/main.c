@@ -11,7 +11,7 @@
 * Av Philip Andersson     *
 **************************/
 
-int isPalindrom(char inputString[]);
+int isPalindrome(char inputString[]);
 void excludeNonAlpha(char inputString[]);
 void convertToLowercase(char inputString[]);
 
@@ -19,28 +19,30 @@ int main(void) {
     int checkReturn, running = 1;
     char input[MAX], keepRunning;
 
-    while (running == 1) {
-        printf("Kolla om en sträng är ett palindrom.\n");
+    while (running) {
+        printf("Kolla om en sträng är en palindrom.\n");
         printf("Skriv in ett ord eller mening: \n");
 
-        while (getchar() != '\n'); //Rensar bufferten???
+
+        //fgets(input, MAX, stdin);
         gets(input);
+        fflush(stdin);
 
         excludeNonAlpha(input);
         convertToLowercase(input);
 
-        checkReturn = isPalindrom(input);
+        checkReturn = isPalindrome(input);
         if(checkReturn == 1) {
-            printf("\nSträngnen är ett palindrom!\n");
+            printf("\nSträngnen är en palindrom!\n");
         }
         else {
-            printf("\nSträngen är inte ett palindrom.\n");
+            printf("\nSträngnen är inte en palindrom.\n");
         }
-
 
         do {
             printf("\nVill du köra programet igen? (j/n)\n");
             scanf("%c", &keepRunning);
+            while (getchar() != '\n'); //Rensar bufferten???
         } while(keepRunning != 'j' && keepRunning != 'n');
 
         if(keepRunning == 'n') {
@@ -51,14 +53,13 @@ int main(void) {
         }
     }
 
-    printf("Färdigt\n");
     return 0;
 }
 
 //Kollar om en sträng är ett palindrom
-int isPalindrom(char inputString[]) {
+int isPalindrome(char inputString[]) {
     int len = strlen(inputString), isTheSame = 1;
-    char checkInput[MAX];
+    char checkInput[len];
 
     for(int i = 0; i < len; i++) {
         checkInput[i] = inputString[len - 1 - i];
@@ -73,7 +74,7 @@ int isPalindrom(char inputString[]) {
     return isTheSame;
 }
 
-//Exluderar icke-alfabetiska tecken i inputString
+//Exluderar icke-alfabetiska tecken i inputString[]
 void excludeNonAlpha(char inputString[]) {
     int position = 0, len = strlen(inputString);
     char alphaString[MAX];
