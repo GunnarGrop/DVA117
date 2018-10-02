@@ -22,11 +22,7 @@ int main(void) {
     while (running) {
         printf("Kolla om en sträng är en palindrom.\n");
         printf("Skriv in ett ord eller mening: \n");
-
-
-        //fgets(input, MAX, stdin);
         gets(input);
-        fflush(stdin);
 
         excludeNonAlpha(input);
         convertToLowercase(input);
@@ -38,6 +34,8 @@ int main(void) {
         else {
             printf("\nSträngnen är inte en palindrom.\n");
         }
+
+        puts(input);
 
         do {
             printf("\nVill du köra programet igen? (j/n)\n");
@@ -59,7 +57,7 @@ int main(void) {
 //Kollar om en sträng är ett palindrom
 int isPalindrome(char inputString[]) {
     int len = strlen(inputString), isTheSame = 1;
-    char checkInput[len];
+    char checkInput[MAX];
 
     for(int i = 0; i < len; i++) {
         checkInput[i] = inputString[len - 1 - i];
@@ -84,6 +82,13 @@ void excludeNonAlpha(char inputString[]) {
             alphaString[position] = inputString[i];
             position++;
         }
+    }
+
+    /*Om sista tecknet i alphaString[] inte är alfabetiskt
+      sätts den till '\0', alltså sluttecknet.                                 */
+    int alphaLen = strlen(alphaString);
+    if (isalpha(alphaString[alphaLen - 1]) == 0) {
+        alphaString[alphaLen - 1] = '\0';
     }
 
     for(int i = 0; i < len; i++) {
