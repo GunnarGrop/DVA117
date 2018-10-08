@@ -4,6 +4,12 @@
 
 #define MAX 100
 
+/**************************
+* Uppgift 5.2             *
+* DVA117 - Programmering  *
+* Av Philip Andersson     *
+**************************/
+
 int main() {
     char input[MAX], *wordPointer, running;
 

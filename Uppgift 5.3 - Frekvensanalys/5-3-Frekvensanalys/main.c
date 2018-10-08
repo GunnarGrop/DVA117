@@ -3,6 +3,12 @@
 #define MAX 100
 #define MAXNUMBER 1000
 
+/**************************
+* Uppgift 5.3             *
+* DVA117 - Programmering  *
+* Av Philip Andersson     *
+**************************/
+
 void lookForMostFrequent(int inputArray[MAX], int *number,int *frequency);
 
 int main(){

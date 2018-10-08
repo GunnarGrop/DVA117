@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <math.h>
 
+/**************************
+* Uppgift 5.1             *
+* DVA117 - Programmering  *
+* Av Philip Andersson     *
+**************************/
+
 float squareRoot(float number, float *result);
 
 int main()
