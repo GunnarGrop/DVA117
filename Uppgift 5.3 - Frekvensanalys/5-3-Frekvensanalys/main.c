@@ -22,7 +22,7 @@ int main(){
 }
 
 void lookForMostFrequent(int inputArray[MAX], int *number,int *frequency){
-    int tmpFrequency = 0, mostFrequentNumber, frequencyAmount;
+    int tmpFrequency, mostFrequentNumber, frequencyAmount;
 
     //Går igenom alla tal, 0 till MAXNUMBER
     for(int i = 0; i <= MAXNUMBER; i++){
