@@ -7,12 +7,11 @@
 * Av Philip Andersson     *
 **************************/
 
-float squareRoot(float number, float *result);
+float squareRoot(float *number);
 
 int main()
 {
-    float inputNumber, *result;
-    result = &inputNumber;
+    float inputNumber;
 
     printf("Räkna ut kvadratroten ur ett tal.\n");
     printf("Skriv in ett tal: ");
@@ -20,7 +19,7 @@ int main()
     scanf("%f", &inputNumber);
     float originalNumber = inputNumber;
 
-    int sqrtReturn = squareRoot(inputNumber, result);
+    int sqrtReturn = squareRoot(&inputNumber);
     if(sqrtReturn == 1) {
         printf("Roten ur %.3f är %.3f. \n",originalNumber, inputNumber);
     }
@@ -31,9 +30,9 @@ int main()
     return 0;
 }
 
-float squareRoot(float number, float *result) {
-    if (number > 0) {
-        *result = sqrt(number);
+float squareRoot(float *number) {
+    if (*number > 0) {
+        *number = sqrt(*number);
         return 1;
     }
     else {

@@ -35,8 +35,6 @@ int main(void) {
             printf("\nSträngnen är inte en palindrom.\n");
         }
 
-        puts(input);
-
         do {
             printf("\nVill du köra programet igen? (j/n)\n");
             scanf("%c", &keepRunning);
@@ -56,20 +54,15 @@ int main(void) {
 
 //Kollar om en sträng är ett palindrom
 int isPalindrome(char inputString[]) {
-    int len = strlen(inputString), isTheSame = 1;
-    char checkInput[MAX];
+    int len = strlen(inputString);
 
-    for(int i = 0; i < len; i++) {
-        checkInput[i] = inputString[len - 1 - i];
-    }
-
-    for(int i = 0; i < len; i++) {
-        if(checkInput[i] != inputString[i]) {
-            isTheSame = 0;
+    for(int i = 0; i < len; i++){
+        if(inputString[i] != inputString[len - 1 - i]){
+            return 0;
         }
     }
 
-    return isTheSame;
+    return 1;
 }
 
 //Exluderar icke-alfabetiska tecken i inputString[]
@@ -78,20 +71,15 @@ void excludeNonAlpha(char inputString[]) {
     char alphaString[MAX];
 
     for(int i = 0; i < len; i++) {
-        if(isalpha(inputString[i]) != 0) {
+        if(isalpha(inputString[i])) {
             alphaString[position] = inputString[i];
             position++;
         }
     }
 
-    /*Om sista tecknet i alphaString[] inte är alfabetiskt
-      sätts den till '\0', alltså sluttecknet.                                 */
-    int alphaLen = strlen(alphaString);
-    if (isalpha(alphaString[alphaLen - 1]) == 0) {
-        alphaString[alphaLen - 1] = '\0';
-    }
+    alphaString[position] = '\0';
 
-    for(int i = 0; i < len; i++) {
+    for(int i = 0; i <= len; i++) {
         inputString[i] = alphaString[i];
     }
 }
@@ -101,11 +89,7 @@ void convertToLowercase(char inputString[]) {
     int len = strlen(inputString);
     char lowercaseString[MAX];
 
-    for(int i = 0; i < len; i++) {
-        lowercaseString[i] = tolower(inputString[i]);
-    }
-
-    for(int i = 0; i < len; i++) {
-        inputString[i] = lowercaseString[i];
+    for(int i = 0; i < len; i++){
+        inputString[i] = tolower(inputString[i]);
     }
 }

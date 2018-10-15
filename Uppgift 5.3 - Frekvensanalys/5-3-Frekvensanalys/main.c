@@ -9,15 +9,20 @@
 * Av Philip Andersson     *
 **************************/
 
-void lookForMostFrequent(int inputArray[MAX], int *number,int *frequency);
+void lookForMostFrequent(int inputArray[MAX], int *pNumber,int *pFrequency);
 
 int main(){
     int input[MAX], mostFrequentNumber, frequencyAmount;
 
-    printf("Vänligen mata in tal mellan 0-1000 (max 100st). Avsluta med ett negativt tal.\n");
+    printf("Vänligen mata in tal mellan 0-%d (max %dst). Avsluta med ett negativt tal.\n", MAXNUMBER, MAX);
 
     for(int i = 0, tmp = 0; i < MAX && tmp >= 0; i++){
+        printf("Skriv in ett tal: ");
         scanf("%d", &tmp);
+        while(tmp > MAXNUMBER){
+            printf("Talet är för stort. Försök igen: ");
+            scanf("%d", &tmp);
+        }
         input[i] = tmp;
     }
 
@@ -27,8 +32,8 @@ int main(){
     return 0;
 }
 
-void lookForMostFrequent(int inputArray[MAX], int *number,int *frequency){
-    int tmpFrequency, mostFrequentNumber, frequencyAmount;
+void lookForMostFrequent(int inputArray[MAX], int *pNumber,int *pFrequency){
+    int tmpFrequency, mostFrequentNumber = 0, frequencyAmount = 0;
 
     //Går igenom alla tal, 0 till MAXNUMBER
     for(int i = 0; i <= MAXNUMBER; i++){
@@ -47,6 +52,6 @@ void lookForMostFrequent(int inputArray[MAX], int *number,int *frequency){
             mostFrequentNumber = i;
         }
     }
-    *frequency = frequencyAmount;
-    *number = mostFrequentNumber;
+    *pFrequency = frequencyAmount;
+    *pNumber = mostFrequentNumber;
 }
