@@ -21,12 +21,12 @@ int checkInputForErrors(float input, char catch, int scanfOutput);
 float tryInput(char output[], char failedOutput[]);
 
 int main(){
-    _Bool running = 1;
+    int choice;
     shoppingList groceries;
     groceries.itemsInList = 0;
 
-    while(running){
-        int choice = tryInput("1. Add item to list\n2. Print list\n3. Quit\nChoice: ", "\nPlease choose one.\n\n");
+    while(choice != 3){
+        choice = tryInput("1. Add item to list\n2. Print list\n3. Quit\nChoice: ", "\nPlease choose one.\n\n");
 
         switch(choice){
         case 1:
@@ -36,7 +36,6 @@ int main(){
             printList(&groceries);
             break;
         case 3:
-            running = 0;
             break;
         default:
             printf("\nPlease choose one.\n\n");
@@ -69,11 +68,18 @@ void AddItemToList(shoppingList *pGroceries){
 
 void printList(shoppingList *pGroceries){
     system("clear");
-    printf("You have %d items in you list:\n", pGroceries->itemsInList);
-    for(int i = 0; i < pGroceries->itemsInList; i++){
-        printf("%-20s\t",pGroceries->ShoppingListItem[i].item);
-        printf("%5.6g ", pGroceries->ShoppingListItem[i].amount);
-        printf("%-5s\n", pGroceries->ShoppingListItem[i].unit);
+    if(pGroceries->itemsInList == 0){
+        printf("Your shopping list is empty.\n");
+    }else{
+        printf("-----------------------------------------------\n");
+        printf("|Item\t\t             Amount Unit      |\n");
+        printf("|.............................................|\n");
+        for(int i = 0; i < pGroceries->itemsInList; i++){
+            printf("|%-20s\t", pGroceries->ShoppingListItem[i].item);
+            printf("%11.6g ", pGroceries->ShoppingListItem[i].amount);
+            printf("%-10s|\n", pGroceries->ShoppingListItem[i].unit);
+        }
+        printf("-----------------------------------------------\n");
     }
     printf("\n");
 }
