@@ -15,7 +15,7 @@ typedef struct{
     int itemsInList;
 }shoppingList;
 
-void editList(groceryItem *pGroceries);
+void AddItemToList(shoppingList *pGroceries);
 void printList(shoppingList *pGroceries);
 int checkInputForErrors(float input, char catch, int scanfOutput);
 float tryInput(char output[], char failedOutput[]);
@@ -26,16 +26,11 @@ int main(){
     groceries.itemsInList = 0;
 
     while(running){
-        int choice = tryInput("1. Edit list.\n2. Print list.\n3. Quit.\nChoice: ", "\nPlease choose one.\n\n");
+        int choice = tryInput("1. Add item to list.\n2. Print list.\n3. Quit.\nChoice: ", "\nPlease choose one.\n\n");
 
         switch(choice){
         case 1:
-            if(groceries.itemsInList <= 4){
-                editList(&groceries.ShoppingListItem[groceries.itemsInList]);
-                groceries.itemsInList++;
-            }else{
-                printf("\nYou cannot add more items to your shopping list.\n\n");
-            }
+            AddItemToList(&groceries);
             break;
         case 2:
             printList(&groceries);
@@ -51,25 +46,30 @@ int main(){
     return 0;
 }
 
-void editList(groceryItem *pGroceries){
-    system("clear");
-    printf("Item: ");
-    gets(pGroceries->item);
+void AddItemToList(shoppingList *pGroceries){
+    if(pGroceries->itemsInList <= 4){
+        system("clear");
+        printf("Item: ");
+        gets(pGroceries->ShoppingListItem[pGroceries->itemsInList].item);
 
-    float tmpInput = tryInput("Amount: ", "Invalid input. Please try again.\n");
-    pGroceries->amount = tmpInput;
+        float tmpInput = tryInput("Amount: ", "Invalid input. Please try again.\n");
+        pGroceries->ShoppingListItem[pGroceries->itemsInList].amount = tmpInput;
 
-    printf("Unit: ");
-    gets(pGroceries->unit);
-    printf("\n");
-    system("clear");
+        printf("Unit: ");
+        gets(pGroceries->ShoppingListItem[pGroceries->itemsInList].unit);
+        printf("\n");
+        system("clear");
+        pGroceries->itemsInList++;
+    }else{
+        printf("\nYou cannot add more items to your shopping list.\n\n");
+    }
 }
 
 void printList(shoppingList *pGroceries){
     system("clear");
     printf("You have %d items in you list:\n", pGroceries->itemsInList);
     for(int i = 0; i < pGroceries->itemsInList; i++){
-        printf("%-15s\t%.1f%s\n",pGroceries->ShoppingListItem[i].item, pGroceries->ShoppingListItem[i].amount, pGroceries->ShoppingListItem[i].unit);
+        printf("%-15s\t%-5.6g%s\n",pGroceries->ShoppingListItem[i].item, pGroceries->ShoppingListItem[i].amount, pGroceries->ShoppingListItem[i].unit);
     }
     printf("\n");
 }
@@ -78,7 +78,7 @@ void printList(shoppingList *pGroceries){
   rätt tecken efter siffran (enterslag)*/
 int checkInputForErrors(float input, char catch, int scanfOutput){
     if(input < 0 || scanfOutput == 0 || catch != '\n'){
-        if(catch != '\n'){
+        if(scanfOutput == 0){
             while(getchar() != '\n');
         }
         return 1;
