@@ -26,7 +26,7 @@ int main(){
     groceries.itemsInList = 0;
 
     while(running){
-        int choice = tryInput("1. Add item to list.\n2. Print list.\n3. Quit.\nChoice: ", "\nPlease choose one.\n\n");
+        int choice = tryInput("1. Add item to list\n2. Print list\n3. Quit\nChoice: ", "\nPlease choose one.\n\n");
 
         switch(choice){
         case 1:
@@ -51,12 +51,14 @@ void AddItemToList(shoppingList *pGroceries){
         system("clear");
         printf("Item: ");
         gets(pGroceries->ShoppingListItem[pGroceries->itemsInList].item);
+        pGroceries->ShoppingListItem[pGroceries->itemsInList].item[ITEMSIZE-1] = '\0';
 
         float tmpInput = tryInput("Amount: ", "Invalid input. Please try again.\n");
         pGroceries->ShoppingListItem[pGroceries->itemsInList].amount = tmpInput;
 
         printf("Unit: ");
         gets(pGroceries->ShoppingListItem[pGroceries->itemsInList].unit);
+        pGroceries->ShoppingListItem[pGroceries->itemsInList].unit[UNITSIZE-1];
         printf("\n");
         system("clear");
         pGroceries->itemsInList++;
@@ -69,7 +71,9 @@ void printList(shoppingList *pGroceries){
     system("clear");
     printf("You have %d items in you list:\n", pGroceries->itemsInList);
     for(int i = 0; i < pGroceries->itemsInList; i++){
-        printf("%-15s\t%-5.6g%s\n",pGroceries->ShoppingListItem[i].item, pGroceries->ShoppingListItem[i].amount, pGroceries->ShoppingListItem[i].unit);
+        printf("%-20s\t",pGroceries->ShoppingListItem[i].item);
+        printf("%5.6g ", pGroceries->ShoppingListItem[i].amount);
+        printf("%-5s\n", pGroceries->ShoppingListItem[i].unit);
     }
     printf("\n");
 }
@@ -87,7 +91,7 @@ int checkInputForErrors(float input, char catch, int scanfOutput){
     return 0;
 }
 
-//Försök kontinuerligt ta input från användaren
+//Försök kontinuerligt ta input från användaren om det felar
 float tryInput(char output[], char failedOutput[]){
     int scanfOutput, errorCheck;
     float choice;
